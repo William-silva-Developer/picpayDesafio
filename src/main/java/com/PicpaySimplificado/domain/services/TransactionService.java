@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
@@ -20,7 +21,8 @@ import reactor.core.publisher.Mono;
 @Service
 public class TransactionService {
 
-    //Pausei o video em 48
+    @Value("${api.authorized}")
+    private String url;
 
     private final TransactionRepository transactionRepository;
     
@@ -36,7 +38,7 @@ public class TransactionService {
    
    
    public boolean verifyAuthrized(Long senderId, BigDecimal value) throws Exception{
-    String url = "";
+    
     AutorizacaoRequestDTO autorizacaoRequestDTO = new AutorizacaoRequestDTO(senderId, value);
     
     //CHAMANDO O ENDPOINT EXTERNO

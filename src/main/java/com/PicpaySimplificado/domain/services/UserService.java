@@ -1,12 +1,15 @@
 package com.PicpaySimplificado.domain.services;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 import org.springframework.stereotype.Service;
+
 
 import com.PicpaySimplificado.domain.model.User;
 import com.PicpaySimplificado.domain.model.UserType;
 import com.PicpaySimplificado.domain.repositories.UserRepository;
+import com.PicpaySimplificado.domain.requestDtos.UserRequestDTO;
 
 import jakarta.transaction.Transactional;
 
@@ -34,6 +37,27 @@ private UserRepository userRepository;
     @Transactional
     public void saveUser(User user){
     this.userRepository.save(user);
+    }
+    @Transactional
+    public User createUser(UserRequestDTO user) throws Exception {
+        try {
+         User newUser = new User(user);
+         this.createUser(user);
+         return newUser;
+
+        } catch (Exception e) {
+            throw e;
+        }
+    }
+
+    public List<User> getAllUsers() {
+        try {
+            List<User> users = this.userRepository.findAll();
+            
+            return users;
+        } catch (Exception e) {
+        throw e;
+        }
     }
 
 
