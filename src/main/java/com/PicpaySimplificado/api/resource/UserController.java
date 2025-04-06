@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.PicpaySimplificado.api.responseDtos.UserResponseDTO;
 import com.PicpaySimplificado.domain.model.User;
 import com.PicpaySimplificado.domain.requestDtos.UserRequestDTO;
 import com.PicpaySimplificado.domain.services.UserService;
@@ -19,7 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 
 @RestController
-@RequestMapping("/api/v2")
+@RequestMapping("/")
 public class UserController {
 
     @Autowired
@@ -29,6 +30,7 @@ public class UserController {
     
     @PostMapping("/criar")
     public ResponseEntity<User> createUser(@RequestBody UserRequestDTO user) throws Exception{
+        System.out.println("CONTROLLER");
         User newUser = userService.createUser(user);
 
         return new ResponseEntity<>(newUser, HttpStatus.CREATED);
@@ -37,6 +39,7 @@ public class UserController {
     @GetMapping("/users")
     public ResponseEntity<List<User>> getUsers() {
         List<User> allUsers = this.userService.getAllUsers();
+    
         return new ResponseEntity<>(allUsers, HttpStatus.OK);
     }
     

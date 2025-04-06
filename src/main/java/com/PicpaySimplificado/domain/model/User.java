@@ -15,6 +15,7 @@ import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity(name = "usuarios")
@@ -22,6 +23,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @AllArgsConstructor
+@NoArgsConstructor
 @EqualsAndHashCode(of = "id")
 public class User {
 
@@ -53,6 +55,7 @@ public class User {
         this.userType = data.userType();
         this.password = data.password();
         this.email = data.email();
+        this.document = data.document();
     }
 
 }

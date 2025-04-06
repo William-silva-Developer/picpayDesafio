@@ -1,8 +1,10 @@
 package com.PicpaySimplificado.domain.services;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
@@ -16,7 +18,8 @@ import jakarta.transaction.Transactional;
 @Service
 public class UserService {
 
-private UserRepository userRepository;
+@Autowired
+private  UserRepository userRepository;
 
     public void validateTransaction(User sender, BigDecimal amount) throws Exception{
     
@@ -41,9 +44,10 @@ private UserRepository userRepository;
     @Transactional
     public User createUser(UserRequestDTO user) throws Exception {
         try {
+        System.out.println("SERVICE: "+user);
          User newUser = new User(user);
-         this.createUser(user);
-         return newUser;
+         User user2 = userRepository.save(newUser);
+         return user2;
 
         } catch (Exception e) {
             throw e;
@@ -52,8 +56,9 @@ private UserRepository userRepository;
 
     public List<User> getAllUsers() {
         try {
-            List<User> users = this.userRepository.findAll();
             
+            List<User> users = userRepository.findAll();
+            System.out.println("USUARIOS: "+users);
             return users;
         } catch (Exception e) {
         throw e;
